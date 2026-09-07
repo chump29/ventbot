@@ -1,0 +1,10 @@
+*
+
+!bun.lock
+!env.ts
+!events/
+!utils/
+!healthcheck.sh
+!index.ts
+!package.json
+!tsconfig.json

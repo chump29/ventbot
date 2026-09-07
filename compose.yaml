@@ -1,0 +1,24 @@
+services:
+  ventbot:
+    container_name: ventbot
+    image: git.postfmly.com/admin/ventbot:arm64
+    restart: unless-stopped
+    ports:
+      - "8009:8009"
+    volumes:
+      - db:/app/db
+    environment:
+      - LOGO_PORT=8009
+      - LOGO_URL=https://ventbot.postfmly.us/ventbot.webp
+      - TZ=America/Chicago
+    env_file: .env
+    labels:
+      - wud.display.name=VentBot
+      - homepage.group=Personal
+      - homepage.name=VentBot
+      - homepage.icon=https://ventbot.postfmly.com/ventbot.webp
+
+volumes:
+  db:
+
+networks: {}
