@@ -1,21 +1,13 @@
 import { error, info } from "@postfmly/logger"
-import { type ILogoServerConfig, LogoServer } from "@postfmly/logoserver"
 
-import { loadCommands } from "./events/loadCommands.ts"
-import { client, login, shutdown } from "./utils/client.ts"
-import { env } from "./utils/env.ts"
-import { type IEnv } from "./utils/IEnv.ts"
+import { init, shutdown } from "./utils/client.ts"
 
-const { DEBUG, LOGO_NAME, LOGO_PATH, LOGO_PORT }: IEnv = env
+try {
+  await init()
 
-const logoServer: LogoServer = new LogoServer({ DEBUG, LOGO_NAME, LOGO_PATH, LOGO_PORT } as ILogoServerConfig)
+  info("🟢 Running...")
+} catch (e: unknown) {
+  error(e)
 
-Promise.resolve()
-  .then(() => loadCommands(client(logoServer)))
-  .then(() => login())
-  .then(() => logoServer.start())
-  .then(() => info("🟢 Running..."))
-  .catch((e: unknown) => {
-    error(e)
-    shutdown("ERROR")
-  })
+  await shutdown()
+}

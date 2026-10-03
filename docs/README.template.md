@@ -11,7 +11,8 @@
 ![Coverage](https://img.shields.io/badge/Coverage-$_coverage%25-success?style=plastic&logo=jest "Coverage")
 
 ![NO AI](https://img.shields.io/badge/NO-AI-orange?style=plastic "NO AI") &nbsp;
-![License](https://img.shields.io/github/license/$_user/$_repo?style=plastic&color=blueviolet&label=License&logo=gplv3 "GPLv3")
+![License](https://img.shields.io/github/license/$_user/$_repo?style=plastic&color=blueviolet&label=License&logo=gplv3 "GPLv3") &nbsp; <!-- markdownlint-disable MD013 -->
+![CVE Scan](https://img.shields.io/badge/CVE%20Scan-Pass-success?style=plastic&logo=owasp "CVE Scan")
 
 ---
 
@@ -37,11 +38,11 @@
 
 #### Commands:
 
-| 📋 Task |    🔧 Command     | ⚙️ Permission |
-|:-------:|:-----------------:|:-------------:|
-|  Info   |      `/info`      | SendMessages  |
-|  Ping   |      `/ping`      | SendMessages  |
-|  Vent   | `/vent <message>` | SendMessages  |
+| 📋 Task |    🔧 Command     |
+|:-------:|:-----------------:|
+|  Info   |      `/info`      |
+|  Ping   |      `/ping`      |
+|  Vent   | `/vent <message>` |
 
 ---
 
@@ -51,26 +52,23 @@
 
 | 📝 Description | 📌 Variable |  {...} Value   |
 |:--------------:|:-----------:|:--------------:|
-|   Channel ID   | CHANNEL_ID  |      [id]      |
+|   Channel ID   | CHANNEL_ID  |     \<id>      |
 |     Debug      |    DEBUG    | true/**false** |
-|    Logo URL    |  LOGO_URL   |     [url]      |
 |    Bot Name    |    NAME     |    VentBot     |
-|   Bot Token    |    TOKEN    |    [token]     |
+|   Bot Token    |    TOKEN    |    \<token>    |
 
 ##### From `@postfmly/logoserver`:
 
 | 📝 Description | 📌 Variable |    {...} Value    |
 |:--------------:|:-----------:|:-----------------:|
-|   IPv4/IPv6    |  LOGO_IPv6  |  true/**false**   |
 |   Logo Name    |  LOGO_NAME  |   ventbot.webp    |
 |   Local Path   |  LOGO_PATH  |  ./utils/images   |
 |      Port      |  LOGO_PORT  | **Random**/[port] |
+|    Logo URL    |  LOGO_URL   |      \<url>       |
 
 ##### From `@postfmly/checkrate`:
 
-| 📝 Description | 📌 Variable | {...} Value |
-|:--------------:|:-----------:|:-----------:|
-|   Rate Limit   |    RATE     |     1s      |
+###### *NOTE: Rate limited to 1 request per 1 second*
 
 #### Deployment:
 

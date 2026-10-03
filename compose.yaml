@@ -5,8 +5,6 @@ services:
     restart: unless-stopped
     ports:
       - "8009:8009"
-    volumes:
-      - db:/app/db
     environment:
       - LOGO_PORT=8009
       - LOGO_URL=https://ventbot.postfmly.us/ventbot.webp
@@ -17,8 +15,5 @@ services:
       - homepage.group=Personal
       - homepage.name=VentBot
       - homepage.icon=https://ventbot.postfmly.com/ventbot.webp
-
-volumes:
-  db:
 
 networks: {}

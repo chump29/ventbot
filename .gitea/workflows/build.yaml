@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: bun install --frozen-lockfile
+        run: bun ci
 
       - name: Install dotenv-linter
         run: curl -sSfL https://git.io/JLbXn | sh -s -- -b /usr/local/bin
@@ -38,7 +38,7 @@ jobs:
         run: bun run lint:biome:ci
 
       - name: Testing
-        run: bun run test
+        run: bun run test:coverage
 
   amd64:
     needs: [check]
@@ -55,8 +55,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
 
       - name: Build and push
-        run: docker buildx build --platform linux/amd64 --tag
-          git.postfmly.com/admin/ventbot:amd64 --push .
+        run: docker buildx build --platform linux/amd64 --tag git.postfmly.com/admin/ventbot:amd64 --push .
 
   arm64:
     needs: [check]
@@ -73,8 +72,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
 
       - name: Build and push
-        run: docker buildx build --platform linux/arm64 --tag
-          git.postfmly.com/admin/ventbot:arm64 --push .
+        run: docker buildx build --platform linux/arm64 --tag git.postfmly.com/admin/ventbot:arm64 --push .
 
   manifest:
     needs: [amd64, arm64]

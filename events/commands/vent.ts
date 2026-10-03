@@ -1,14 +1,11 @@
 import { parse } from "node:path"
 
-import { checkRate } from "@postfmly/checkrate"
-import { error } from "@postfmly/logger"
 import { type Nullable } from "@postfmly/types"
 
 import {
   type ChatInputCommandInteraction,
   InteractionContextType,
   MessageFlags,
-  PermissionFlagsBits,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
   SlashCommandBuilder,
   type SlashCommandStringOption,
@@ -16,41 +13,48 @@ import {
   type TextChannel
 } from "discord.js"
 
+import { bucket } from "../../utils/bucket.ts"
+
+const MAX_LEN: number = 2000
+
 const create = (): RESTPostAPIChatInputApplicationCommandsJSONBody =>
   new SlashCommandBuilder()
-    .setName(parse(import.meta.filename).name)
-    .setDescription("Anonymously vent")
+    .setName(parse(import.meta.file).name)
+    .setDescription("Vent anonymously")
     .addStringOption(
       (option: SlashCommandStringOption): SlashCommandStringOption =>
-        option.setName("message").setDescription("The anonymous message that you want to send").setRequired(true)
+        option
+          .setName("message")
+          .setDescription("The anonymous message that you want to send")
+          .setMinLength(1)
+          .setMaxLength(MAX_LEN)
+          .setRequired(true)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .setContexts(InteractionContextType.Guild)
     .toJSON()
 
 const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> => {
-  if (await checkRate(interaction)) {
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral })
+
+  if (!bucket.allow(interaction.user.username)) {
+    await interaction.editReply({ content: "❌ Rate limit exceeded" })
+
     return
   }
 
   const channel: Nullable<TextBasedChannel> = interaction.channel
   if (!channel) {
-    error(`Channel not found for ${interaction.user.displayName}'s anonymous message`)
+    await interaction.editReply({ content: "-# > ❌ Could not get channel" })
 
     return
   }
 
-  await (channel as TextChannel)
-    .send({
-      content: `-# > ${interaction.options.getString("message")}`,
-      flags: MessageFlags.SuppressNotifications
-    })
-    .then(() =>
-      interaction.reply({
-        content: "-# > Anonymous message sent",
-        flags: MessageFlags.Ephemeral
-      })
-    )
+  await (channel as TextChannel).send({
+    content: `-# > ${interaction.options.getString("message") as string}`,
+    flags: MessageFlags.SuppressNotifications
+  })
+
+  await interaction.editReply({ content: "-# > Anonymous message sent" })
 }
 
 export { create, invoke }
