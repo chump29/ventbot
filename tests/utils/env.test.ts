@@ -27,7 +27,7 @@ describe("env", (): void => {
   test("LOGO_NAME", (): void => {
     expectTypeOf(env.LOGO_NAME).toEqualTypeOf<string>()
 
-    expect(env.LOGO_NAME).toBe("weatherbot.webp")
+    expect(env.LOGO_NAME).toBe("ventbot.webp")
   })
 
   test("LOGO_PATH", (): void => {
@@ -51,7 +51,7 @@ describe("env", (): void => {
   test("NAME", (): void => {
     expectTypeOf(env.NAME).toEqualTypeOf<string>()
 
-    expect(env.NAME).toBe("WeatherBot")
+    expect(env.NAME).toBe("VentBot")
   })
 
   test("TOKEN", (): void => {

@@ -86,11 +86,11 @@ const env = cleanEnv(Bun.env, {
   CHANNEL_ID: idValidator({ testDefault: fakeId }),
   COLOR: colorValidator({ default: "#78866b" }),
   DEBUG: bool({ default: false, testDefault: true }),
-  LOGO_NAME: str({ default: "weatherbot.webp" }),
+  LOGO_NAME: str({ default: "ventbot.webp" }),
   LOGO_PATH: str({ default: "./utils/images" }),
   LOGO_PORT: portValidator({ default: "random" }),
   LOGO_URL: url({ testDefault: fakeURL }),
-  NAME: str({ default: "WeatherBot" }),
+  NAME: str({ default: "VentBot" }),
   TOKEN: tokenValidator({ testDefault: fakeToken })
 })
 
