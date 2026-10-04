@@ -53,6 +53,7 @@
 | 📝 Description | 📌 Variable |  {...} Value   |
 |:--------------:|:-----------:|:--------------:|
 |   Channel ID   | CHANNEL_ID  |     \<id>      |
+|  Embed Color   |    COLOR    |    #78866b     |
 |     Debug      |    DEBUG    | true/**false** |
 |    Bot Name    |    NAME     |    VentBot     |
 |   Bot Token    |    TOKEN    |    \<token>    |
