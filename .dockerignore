@@ -2,7 +2,6 @@
 
 !.husky/prepare.min.mjs
 !bun.lock
-!env.ts
 !events/
 !healthcheck.sh
 !index.ts
