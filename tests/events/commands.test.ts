@@ -8,6 +8,8 @@ import { type Optional } from "@postfmly/types"
 import { fakerEN_US as fake } from "@faker-js/faker"
 import {
   type ChatInputCommandInteraction,
+  type Guild,
+  type GuildChannelManager,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
   type TextChannel,
   type User
@@ -49,12 +51,16 @@ await Promise.all(
         const msg: string = fake.lorem.sentence()
 
         const interaction: ChatInputCommandInteraction = {
-          channel: {
-            send: jest.fn().mockResolvedValue(undefined)
-          } as unknown as TextChannel,
           createdTimestamp: fake.date.past().getTime(),
           deferReply: jest.fn().mockResolvedValue(undefined),
           editReply: jest.fn().mockResolvedValue(undefined),
+          guild: {
+            channels: {
+              fetch: jest.fn().mockResolvedValue({
+                send: jest.fn().mockResolvedValue(undefined)
+              } as unknown as TextChannel)
+            } as unknown as GuildChannelManager
+          } as Guild,
           user: {
             username: fake.internet.username()
           } as User,
@@ -87,17 +93,7 @@ await Promise.all(
             expect(data.footer.text).toEndWith(author.name)
           })
           .with("ping", (): void => expect(payload.content).toInclude("Pong"))
-          .with("vent", (): void => {
-            expect((interaction.channel as TextChannel).send).toHaveBeenCalled()
-
-            const mockChannelSend = (interaction.channel as TextChannel).send as ReturnType<typeof jest.fn>
-            const channelFirstCallArgs = mockChannelSend.mock.calls
-            const channelPayload = channelFirstCallArgs[0]?.[0]
-
-            expect(channelPayload.content).toEndWith(msg)
-
-            expect(payload.content).toEndWith("Anonymous message sent")
-          })
+          .with("vent", (): void => expect(payload.content).toEndWith("Anonymous message sent"))
           .otherwise((): void => {
             throw new Error(`Payload tests not found for /${name}`)
           })

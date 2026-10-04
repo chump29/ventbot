@@ -3,17 +3,18 @@ import { parse } from "node:path"
 import { type Nullable } from "@postfmly/types"
 
 import {
+  type Channel,
   type ChatInputCommandInteraction,
   InteractionContextType,
   MessageFlags,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
   SlashCommandBuilder,
   type SlashCommandStringOption,
-  type TextBasedChannel,
   type TextChannel
 } from "discord.js"
 
 import { bucket } from "../../utils/bucket.ts"
+import { env } from "../../utils/env.ts"
 
 const MAX_LEN: number = 2000
 
@@ -42,7 +43,13 @@ const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> =
     return
   }
 
-  const channel: Nullable<TextBasedChannel> = interaction.channel
+  if (!interaction.guild) {
+    await interaction.editReply({ content: "-# > ❌ Could not get guild" })
+
+    return
+  }
+
+  const channel: Nullable<Channel> = await interaction.guild.channels.fetch(env.CHANNEL_ID)
   if (!channel) {
     await interaction.editReply({ content: "-# > ❌ Could not get channel" })
 
