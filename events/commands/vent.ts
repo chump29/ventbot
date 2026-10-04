@@ -54,7 +54,7 @@ const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> =
     flags: MessageFlags.SuppressNotifications
   })
 
-  await interaction.editReply({ content: "-# > ✅  Anonymous message sent" })
+  await interaction.editReply({ content: "-# > ✅ Anonymous message sent" })
 }
 
 export { create, invoke }
