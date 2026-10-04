@@ -52,6 +52,7 @@
 
 | 📝 Description | 📌 Variable |  {...} Value   |
 |:--------------:|:-----------:|:--------------:|
+|    Activity    |  ACTIVITY   |    Venting     |
 |   Channel ID   | CHANNEL_ID  |     \<id>      |
 |  Embed Color   |    COLOR    |    #78866b     |
 |     Debug      |    DEBUG    | true/**false** |
