@@ -37,7 +37,7 @@ const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> =
   await interaction.deferReply({ flags: MessageFlags.Ephemeral })
 
   if (!bucket.allow(interaction.user.username)) {
-    await interaction.editReply({ content: "❌ Rate limit exceeded" })
+    await interaction.editReply({ content: "-# > ❌ Rate limit exceeded" })
 
     return
   }
@@ -54,7 +54,7 @@ const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> =
     flags: MessageFlags.SuppressNotifications
   })
 
-  await interaction.editReply({ content: "-# > Anonymous message sent" })
+  await interaction.editReply({ content: "-# > ✅  Anonymous message sent" })
 }
 
 export { create, invoke }
