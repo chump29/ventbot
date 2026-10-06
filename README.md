@@ -8,7 +8,7 @@
 ![discord.js](https://img.shields.io/badge/discord.js-^14.27.0-informational?style=plastic&logo=discord.js "discord.js")
 
 ![CodeQL](https://github.com/chump29/ventbot/workflows/CodeQL/badge.svg "CodeQL") &nbsp;
-![Coverage](https://img.shields.io/badge/Coverage-83.03%25-success?style=plastic&logo=jest "Coverage")
+![Coverage](https://img.shields.io/badge/Coverage-83.45%25-success?style=plastic&logo=jest "Coverage")
 
 ![NO AI](https://img.shields.io/badge/NO-AI-orange?style=plastic "NO AI") &nbsp;
 ![License](https://img.shields.io/github/license/chump29/ventbot?style=plastic&color=blueviolet&label=License&logo=gplv3 "GPLv3") &nbsp; <!-- markdownlint-disable MD013 -->
@@ -50,14 +50,16 @@
 
 #### Environment Variables:
 
-| 📝 Description | 📌 Variable |  {...} Value   |
-|:--------------:|:-----------:|:--------------:|
-|    Activity    |  ACTIVITY   |    Venting     |
-|   Channel ID   | CHANNEL_ID  |     \<id>      |
-|  Embed Color   |    COLOR    |    #78866b     |
-|     Debug      |    DEBUG    | true/**false** |
-|    Bot Name    |    NAME     |    VentBot     |
-|   Bot Token    |    TOKEN    |    \<token>    |
+|     📝 Description      | 📌 Variable |  {...} Value   |
+|:-----------------------:|:-----------:|:--------------:|
+|        Activity         |  ACTIVITY   |    Venting     |
+|       Channel ID        | CHANNEL_ID  |     \<id>      |
+| Embed Color<sup>1</sup> |    COLOR    |    #78866b     |
+|          Debug          |    DEBUG    | true/**false** |
+|        Bot Name         |    NAME     |    VentBot     |
+|        Bot Token        |    TOKEN    |    \<token>    |
+
+###### <sup>1</sup> #RRGGBB format <!-- markdownlint-disable-line MD001 -->
 
 ##### From `@postfmly/logoserver`:
 

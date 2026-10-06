@@ -50,14 +50,16 @@
 
 #### Environment Variables:
 
-| 📝 Description | 📌 Variable |  {...} Value   |
-|:--------------:|:-----------:|:--------------:|
-|    Activity    |  ACTIVITY   |    Venting     |
-|   Channel ID   | CHANNEL_ID  |     \<id>      |
-|  Embed Color   |    COLOR    |    #78866b     |
-|     Debug      |    DEBUG    | true/**false** |
-|    Bot Name    |    NAME     |    VentBot     |
-|   Bot Token    |    TOKEN    |    \<token>    |
+|     📝 Description      | 📌 Variable |  {...} Value   |
+|:-----------------------:|:-----------:|:--------------:|
+|        Activity         |  ACTIVITY   |    Venting     |
+|       Channel ID        | CHANNEL_ID  |     \<id>      |
+| Embed Color<sup>1</sup> |    COLOR    |    #78866b     |
+|          Debug          |    DEBUG    | true/**false** |
+|        Bot Name         |    NAME     |    VentBot     |
+|        Bot Token        |    TOKEN    |    \<token>    |
+
+###### <sup>1</sup> #RRGGBB format <!-- markdownlint-disable-line MD001 -->
 
 ##### From `@postfmly/logoserver`:
 
