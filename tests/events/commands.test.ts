@@ -71,8 +71,8 @@ await Promise.all(
 
         expect(await invoke(interaction)).toBeUndefined()
 
-        expect(interaction.deferReply).toHaveBeenCalled()
-        expect(interaction.editReply).toHaveBeenCalled()
+        expect(interaction.deferReply).toHaveBeenCalledTimes(1)
+        expect(interaction.editReply).toHaveBeenCalledTimes(1)
 
         const mockEditReply = interaction.editReply as ReturnType<typeof jest.fn>
         const firstCallArgs = mockEditReply.mock.calls
@@ -94,7 +94,7 @@ await Promise.all(
           })
           .with("ping", (): void => expect(payload.content).toInclude("Pong"))
           .with("vent", (): void => expect(payload.content).toEndWith("Anonymous message sent"))
-          .otherwise((): void => {
+          .otherwise((): never => {
             throw new Error(`Payload tests not found for /${name}`)
           })
       })

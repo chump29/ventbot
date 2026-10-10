@@ -1,5 +1,6 @@
 import { parse } from "node:path"
 
+import { error } from "@postfmly/logger"
 import { type Nullable } from "@postfmly/types"
 
 import {
@@ -15,6 +16,8 @@ import {
 
 import { bucket } from "../../utils/bucket.ts"
 import { env } from "../../utils/env.ts"
+
+const WRONG: string = "-# > ❌ Something went wrong"
 
 const MAX_LEN: number = 2000
 
@@ -44,14 +47,18 @@ const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> =
   }
 
   if (!interaction.guild) {
-    await interaction.editReply({ content: "-# > ❌ Could not get guild" })
+    await interaction.editReply({ content: WRONG })
+
+    error("❌ Could not get guild")
 
     return
   }
 
   const channel: Nullable<Channel> = await interaction.guild.channels.fetch(env.CHANNEL_ID)
   if (!channel) {
-    await interaction.editReply({ content: "-# > ❌ Could not get channel" })
+    await interaction.editReply({ content: WRONG })
+
+    error("❌ Could not get channel")
 
     return
   }
