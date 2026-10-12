@@ -1,23 +1,14 @@
 import { parse } from "node:path"
 
-import { error } from "@postfmly/logger"
-import { type Nullable } from "@postfmly/types"
-
 import {
-  type Channel,
   type ChatInputCommandInteraction,
   InteractionContextType,
-  MessageFlags,
   type RESTPostAPIChatInputApplicationCommandsJSONBody,
   SlashCommandBuilder,
-  type SlashCommandStringOption,
-  type TextChannel
+  type SlashCommandStringOption
 } from "discord.js"
 
-import { bucket } from "../../utils/bucket.ts"
-import { env } from "../../utils/env.ts"
-
-const WRONG: string = "-# > ❌ Something went wrong"
+import { Vent } from "../../utils/vent.ts"
 
 const MAX_LEN: number = 2000
 
@@ -38,37 +29,7 @@ const create = (): RESTPostAPIChatInputApplicationCommandsJSONBody =>
     .toJSON()
 
 const invoke = async (interaction: ChatInputCommandInteraction): Promise<void> => {
-  await interaction.deferReply({ flags: MessageFlags.Ephemeral })
-
-  if (!bucket.allow(interaction.user.username)) {
-    await interaction.editReply({ content: "-# > ❌ Rate limit exceeded" })
-
-    return
-  }
-
-  if (!interaction.guild) {
-    await interaction.editReply({ content: WRONG })
-
-    error("❌ Could not get guild")
-
-    return
-  }
-
-  const channel: Nullable<Channel> = await interaction.guild.channels.fetch(env.CHANNEL_ID)
-  if (!channel) {
-    await interaction.editReply({ content: WRONG })
-
-    error("❌ Could not get channel")
-
-    return
-  }
-
-  await (channel as TextChannel).send({
-    content: `-# > ${interaction.options.getString("message") as string}`,
-    flags: MessageFlags.SuppressNotifications
-  })
-
-  await interaction.editReply({ content: "-# > ✅ Anonymous message sent" })
+  await Vent.vent(interaction)
 }
 
 export { create, invoke }
