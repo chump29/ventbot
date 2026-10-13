@@ -42,7 +42,7 @@ beforeAll(async (): Promise<void> => {
   await Vent.init({
     channels: {
       fetch: jest.fn().mockResolvedValue({
-        send: jest.fn().mockResolvedValue(undefined)
+        send: jest.fn()
       } as unknown as TextChannel)
     } as unknown as ChannelManager
   } as Client)
@@ -69,12 +69,12 @@ await Promise.all(
         const interaction: ChatInputCommandInteraction = {
           channels: {
             fetch: jest.fn().mockResolvedValue({
-              send: jest.fn().mockResolvedValue(undefined)
+              send: jest.fn()
             } as unknown as TextChannel)
           } as unknown as GuildChannelManager,
           createdTimestamp: fake.date.past().getTime(),
-          deferReply: jest.fn().mockResolvedValue(undefined),
-          editReply: jest.fn().mockResolvedValue(undefined),
+          deferReply: jest.fn(),
+          editReply: jest.fn(),
           user: {
             username: fake.internet.username()
           } as User,
