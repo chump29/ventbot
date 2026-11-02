@@ -54,7 +54,7 @@ class VentBotClient implements IVentBotClient {
       LOGO_NAME: env.LOGO_NAME,
       LOGO_PATH: env.LOGO_PATH,
       LOGO_PORT: env.LOGO_PORT
-    } as ILogoServerConfig)
+    } satisfies ILogoServerConfig)
 
     await this.LOGO_SERVER.start()
 
@@ -92,6 +92,4 @@ class VentBotClient implements IVentBotClient {
   }
 }
 
-const Client: IVentBotClient = new VentBotClient()
-
-export { Client }
+export const Client = new VentBotClient()

@@ -1,6 +1,4 @@
-import { type Nullable } from "@postfmly/types"
-
-import { type Channel, type ChatInputCommandInteraction, type Client, MessageFlags, type TextChannel } from "discord.js"
+import { ChannelType, type ChatInputCommandInteraction, type Client, MessageFlags, type TextChannel } from "discord.js"
 
 import { bucket } from "./bucket.ts"
 import { env } from "./env.ts"
@@ -14,12 +12,12 @@ class VentBot implements IVentBot {
   private CHANNEL!: TextChannel
 
   async init(client: Client): Promise<void> {
-    const channel: Nullable<Channel> = await client.channels.fetch(env.CHANNEL_ID)
-    if (!channel) {
+    const channel = await client.channels.fetch(env.CHANNEL_ID)
+    if (channel?.type !== ChannelType.GuildText) {
       throw new Error("Could not get channel")
     }
 
-    this.CHANNEL = channel as TextChannel
+    this.CHANNEL = channel
   }
 
   async vent(interaction: ChatInputCommandInteraction): Promise<void> {
@@ -32,7 +30,8 @@ class VentBot implements IVentBot {
     }
 
     await this.CHANNEL.send({
-      content: `-# > ${interaction.options.getString("message") as string}`,
+      // biome-ignore lint/style/noNonNullAssertion: required
+      content: `-# > ${interaction.options.getString("message")!}`,
       flags: MessageFlags.SuppressNotifications
     })
 
@@ -40,6 +39,4 @@ class VentBot implements IVentBot {
   }
 }
 
-const Vent: IVentBot = new VentBot()
-
-export { Vent }
+export const Vent = new VentBot()

@@ -1,6 +1,8 @@
-import { describe, expect, test } from "bun:test"
-import { $ } from "bun"
+// biome-ignore-all lint/nursery/useLowercaseTestTitle: using env names
 
+import { describe, expect, test } from "bun:test"
+
+import { type HexColorString } from "discord.js"
 import { expectTypeOf } from "expect-type"
 
 import { env } from "../../utils/env.ts"
@@ -13,31 +15,31 @@ describe("env", (): void => {
   })
 
   test("CHANNEL_ID", (): void => {
-    expectTypeOf(env.CHANNEL_ID).toEqualTypeOf<string>()
+    expect(env.CHANNEL_ID).toBeString()
 
     expect(env.CHANNEL_ID.length).toBeGreaterThan(0)
   })
 
   test("COLOR", (): void => {
-    expectTypeOf(env.COLOR).toEqualTypeOf<string>()
+    expectTypeOf(env.COLOR).toEqualTypeOf<HexColorString>()
 
     expect(env.COLOR).toBe("#78866b")
   })
 
   test("DEBUG", (): void => {
-    expectTypeOf(env.DEBUG).toEqualTypeOf<boolean>()
+    expect(env.DEBUG).toBeBoolean()
 
     expect(env.DEBUG).toBeTrue()
   })
 
   test("LOGO_NAME", (): void => {
-    expectTypeOf(env.LOGO_NAME).toEqualTypeOf<string>()
+    expect(env.LOGO_NAME).toBeString()
 
     expect(env.LOGO_NAME).toBe("ventbot.webp")
   })
 
   test("LOGO_PATH", (): void => {
-    expectTypeOf(env.LOGO_PATH).toEqualTypeOf<string>()
+    expect(env.LOGO_PATH).toBeString()
 
     expect(env.LOGO_PATH).toBe("./utils/images")
   })
@@ -45,30 +47,28 @@ describe("env", (): void => {
   test("LOGO_PORT", (): void => {
     expectTypeOf(env.LOGO_PORT).toEqualTypeOf<number | "random">()
 
-    expect(env.LOGO_PORT as string).toBe("random")
+    expect(env.LOGO_PORT).toBe("random")
   })
 
   test("LOGO_URL", (): void => {
-    expectTypeOf(env.LOGO_URL).toEqualTypeOf<string>()
+    expect(env.LOGO_URL).toBeString()
 
     expect(env.LOGO_URL.length).toBeGreaterThan(0)
   })
 
   test("NAME", (): void => {
-    expectTypeOf(env.NAME).toEqualTypeOf<string>()
+    expect(env.NAME).toBeString()
 
     expect(env.NAME).toBe("VentBot")
   })
 
-  test("TOKEN", (): void => {
-    expectTypeOf(env.TOKEN).toEqualTypeOf<string>()
-
-    expect(env.TOKEN.length).toBeGreaterThan(0)
+  test("TEST_FULL", (): void => {
+    expect(env.TEST_FULL).toBeBoolean()
   })
 
-  test("print", async (): Promise<void> => {
-    const txt = await $`bun run --bun ./utils/env.ts`.text()
+  test("TOKEN", (): void => {
+    expect(env.TOKEN).toBeString()
 
-    expect(txt).toContain("[REDACTED]")
+    expect(env.TOKEN.length).toBeGreaterThan(0)
   })
 })

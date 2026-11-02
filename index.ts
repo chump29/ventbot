@@ -9,7 +9,9 @@ try {
 
   info(`🟢 ${env.ACTIVITY}...`)
 } catch (e: unknown) {
-  error(e)
+  const msg = e instanceof Error ? e.message : String(e)
+
+  error(`❌ ${msg}`)
 
   await Client.shutdown()
 }

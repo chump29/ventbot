@@ -1,4 +1,4 @@
-# ![VentBot](./utils/images/ventbot.webp) VentBot
+# ![VentBot](./utils/images/ventbot.webp "VentBot") VentBot
 
 > - VentBot for Discord
 
@@ -33,13 +33,13 @@
 #### Role Permissions:
 
 | ⚙️ Permissions |
-|:--------------:|
+| :------------: |
 |  SendMessages  |
 
 #### Commands:
 
 | 📋 Task |    🔧 Command     |
-|:-------:|:-----------------:|
+| :-----: | :---------------: |
 |  Info   |      `/info`      |
 |  Ping   |      `/ping`      |
 |  Vent   | `/vent <message>` |
@@ -51,7 +51,7 @@
 #### Environment Variables:
 
 |     📝 Description      | 📌 Variable |  {...} Value   |
-|:-----------------------:|:-----------:|:--------------:|
+| :---------------------: | :---------: | :------------: |
 |        Activity         |  ACTIVITY   |    Venting     |
 |       Channel ID        | CHANNEL_ID  |     \<id>      |
 | Embed Color<sup>1</sup> |    COLOR    |    #78866b     |
@@ -64,7 +64,7 @@
 ##### From `@postfmly/logoserver`:
 
 | 📝 Description | 📌 Variable |    {...} Value    |
-|:--------------:|:-----------:|:-----------------:|
+| :------------: | :---------: | :---------------: |
 |   Logo Name    |  LOGO_NAME  |   ventbot.webp    |
 |   Local Path   |  LOGO_PATH  |  ./utils/images   |
 |      Port      |  LOGO_PORT  | **Random**/[port] |
@@ -72,12 +72,12 @@
 
 ##### From `@postfmly/checkrate`:
 
-###### *NOTE: Rate limited to 1 request per 1 second*
+###### _NOTE: Rate limited to 1 request per 1 second_
 
 #### Deployment:
 
 |  📜 Script  |  🔧 Command   |
-|:-----------:|:-------------:|
+| :---------: | :-----------: |
 |    Full     | `./build.sh`  |
 | Docker Only | `./docker.sh` |
 

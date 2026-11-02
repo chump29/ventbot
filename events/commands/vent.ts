@@ -10,7 +10,7 @@ import {
 
 import { Vent } from "../../utils/vent.ts"
 
-const MAX_LEN: number = 2000
+const MAX_LEN = 2000
 
 const create = (): RESTPostAPIChatInputApplicationCommandsJSONBody =>
   new SlashCommandBuilder()
