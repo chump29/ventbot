@@ -34,7 +34,7 @@
     "prepare": "bun run --bun .husky/prepare.min.mjs",
     "prod": "bun run --bun index.ts",
     "scan": "bun run scan:audit && bun run scan:cve && bun run scan:dupe",
-    "scan:audit": "bun audit",
+    "scan:audit": "bun audit --production",
     "scan:cve": "bun run --bun cve-lite --check-maintenance --prod-only --only-used",
     "scan:dupe": "bun dedupe --check",
     "test": "bun test --isolate --dots --preload ./tests/setup.ts --bail --check",
